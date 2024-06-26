@@ -52,7 +52,7 @@ disomeやtrisomeをHel2(ヒトznf598)が認識し、ユビキチン標識する�
 以上の仕組みにおいて、Ltn1によるユビキチン化が起こらない場合、60sサブユニットの異常タンパク質末C端にCATテイル(C-terminal alanine-threoneine tail)がmRNA非依存的に付加される。CATテールは、Ltn1によるユビキチン転移反応の基質となるため、RQCの保険の様な役割を果たす。CATテイル付加の機構は原核生物にも保存されており、枯草菌RQC経路でのRqcHによるAla連続配列の付加は分解のシグナルになっている[9]。
 一方、CATテイルタンパク質が蓄積すると、凝集体を形成し、神経細胞の形成阻害やプログラム細胞死を引き起こすようだ。[10]
 
-また、最近の研究で、znf598の下流で働いているタンパク質としてGIGYF2 、EIF4E2が同定され、これらが翻訳開始を阻害、異常タンパク質の蓄積を防いでk流ようだ[11]。
+また、最近の研究で、znf598の下流で働いているタンパク質であるGIGYF2 、EIF4E2が翻訳開始を阻害、異常タンパク質の蓄積を防いでいることが明らかになった[11]。
 
 ### znf598/Hel2の機能
 以上に書いたようなRQCの機構の中で、主に衝突リボソームのユビキチン化をしているのがznf598である。znf598はE3 ユビキチンリガーゼであるから、E1タンパク質が活性化し、E2タンパク質が結合していたユビキチンを衝突リボソームに転移させる。この際、ユビキチン化の標識となるのは、disome、trisomeに特異的な40s-40s構造であると推定されている。
@@ -73,10 +73,33 @@ alphafold3を用いて構造予測を行った。alphafold2と予測結果はほ
 ## 翻訳後修飾と発現量
 znf598の部位別発現量を、UCSC Genome Browserを用いて調査した。すると、小脳、肺に多く発現し、逆に精巣にはほとんど見られなかった。また、ヒストン修飾をみても発現量との相関はあまり見られなかった。
 
-## NGS data
-RQCにおける4EHP-GIGYF1/2複合体の役割について研究した研究[13]のデータを用いたが、特定の経路の関与は検出されなかった。
+## NGSデータの解析
+RQC経路/NGD経路における4EHP-GIGYF1/2複合体の役割について研究した研究[13]のデータを用い、iDEP2.0を用いて解析を行なった。すると、Complement and coagulation cascadesなど複数の経路に関与していることが示唆された。以下の表は有意水準0.01とした際の関係する経路である(KEGGにはmRNA regulation関係のpathwayが登録されていないからそれは出てきていないのかな)。免疫系の経路がいくつか提案されているのは、K63ユビキチン化が免疫反応においても何かしらの標識になっているからかもしれない。
 
-## 参考文献
+<details><summary>pathways</summary>
+
+| Pathway | Direction | NES | Genes | adj.Pval |
+|--|--|--|--|--|
+| [Complement and coagulation cascades](http://www.genome.jp/kegg-bin/show_pathway?hsa04610) | Up | 0.681 | 50 | 3.50E-05 |
+| [Hypertrophic cardiomyopathy](http://www.genome.jp/kegg-bin/show_pathway?hsa05410) | Up | 0.6126 | 70 | 1.10E-04 |
+| [Rheumatoid arthritis](http://www.genome.jp/kegg-bin/show_pathway?hsa05323) | Up | 0.61 | 66 | 1.70E-04 |
+| [Dilated cardiomyopathy](http://www.genome.jp/kegg-bin/show_pathway?hsa05414) | Up | 0.5896 | 75 | 2.00E-04 |
+| [Viral protein interaction with cytokine and cytokine receptor](http://www.genome.jp/kegg-bin/show_pathway?hsa04061) | Up | 0.6521 | 50 | 2.30E-04 |
+| [Inflammatory bowel disease](http://www.genome.jp/kegg-bin/show_pathway?hsa05321) | Up | 0.6443 | 42 | 1.90E-03 |
+| [Graft-versus-host disease](http://www.genome.jp/kegg-bin/show_pathway?hsa05332) | Up | 0.7592 | 19 | 2.10E-03 |
+| [Antigen processing and presentation](http://www.genome.jp/kegg-bin/show_pathway?hsa04612) | Up | 0.6058 | 48 | 2.50E-03 |
+| [Bile secretion](http://www.genome.jp/kegg-bin/show_pathway?hsa04976) | Up | 0.5947 | 53 | 2.50E-03 |
+| [Type I diabetes mellitus](http://www.genome.jp/kegg-bin/show_pathway?hsa04940) | Up | 0.6904 | 23 | 6.80E-03 |
+| [Type II diabetes mellitus](http://www.genome.jp/kegg-bin/show_pathway?hsa04930) | Up | 0.6177 | 37 | 6.80E-03 |
+| [Nitrogen metabolism](http://www.genome.jp/kegg-bin/show_pathway?hsa00910) | Up | 0.7837 | 13 | 7.70E-03 |
+| [Malaria](http://www.genome.jp/kegg-bin/show_pathway?hsa05144 ) | Up | 0.6337 | 31 | 7.70E-03 |
+
+</details>
+  
+また、Deseq2を用いて発現変動量について調べ、その有意差が多い遺伝子1000個のリストをpantherでGo term解析した。すると、DEGsが関わる経路として、mRNA結合の制御などmRNAに関連する経路の発現量が増加していた。これらは、ZNF598をサイレンシングした埋め合わせとして発現量が増加するように制御されたと考えることができる。
+
+## 参考資料
+### 文献
 1. [Juszkiewicz, Szymon, and Ramanujan S. Hegde. "Initiation of quality control during poly (A) translation requires site-specific ribosome ubiquitination." Molecular cell 65.4 (2017): 743-750.](https://doi.org/10.1016/j.molcel.2016.11.039)
 2. [Singh, Rakesh Kumar, et al. "Novel E3 ubiquitin ligases that regulate histone protein levels in the budding yeast Saccharomyces cerevisiae." PLoS One 7.5 (2012): e36295.](https://doi.org/10.1371/journal.pone.0036295)
 3. [稲田利文. "タンパク質恒常性維持の鍵となるリボソーム動態制御と異常翻訳品質管理機構." Journal of Japanese Biochemical Society 93.5 (2021): 723-732.](https://doi.org/10.14952/SEIKAGAKU.2021.930723)
@@ -90,6 +113,19 @@ RQCにおける4EHP-GIGYF1/2複合体の役割について研究した研究[13]
 11. [Hickey, Kelsey L., et al. "GIGYF2 and 4EHP inhibit translation initiation of defective messenger RNAs to assist ribosome-associated quality control." Molecular cell 79.6 (2020): 950-962.](https://doi.org/10.1016/j.molcel.2020.07.007)
 12. [Singh, Rakesh Kumar, et al. "Novel E3 ubiquitin ligases that regulate histone protein levels in the budding yeast Saccharomyces cerevisiae." PLoS One 7.5 (2012): e36295.](https://doi.org/10.1371/journal.pone.0036295)
 13. [Weber, Ramona, et al. "4EHP and GIGYF1/2 mediate translation-coupled messenger RNA decay." Cell reports 33.2 (2020).](https://doi.org/10.1016/j.celrep.2020.108262)
+
+### ツール
+- NCBI gene (https://www.ncbi.nlm.nih.gov/gene)
+- BLAST (https://blast.ncbi.nlm.nih.gov/Blast.cgi)
+- Multiple Sequence Alignment by CLUSTALW (https://www.genome.jp/tools-bin/clustalw)
+- InterPro (https://www.ebi.ac.uk/interpro/)
+- IUPred2 (https://iupred2a.elte.hu/)
+- PLAAC (http://plaac.wi.mit.edu/)
+- alphafold 2 (https://alphafold.ebi.ac.uk/)
+- alphafold 3 beta (https://golgi.sandbox.google.com/)
+- UCSC genome browser (https://genome.ucsc.edu/)
+- iDEP 2.01 (http://bioinformatics.sdstate.edu/idep/)
+- panther (https://pantherdb.org/)
 
 [^1]: 終止コドンを欠いたmRNAのこと。
 [^2]: コドンは最適コドンと非最適コドンの二種類に分けることができ、コドンの3文字目がAあるいはTのものを最適コドン、CあるいはGのものを非最適コドンと呼ぶ。このうち、非最適コドンはmRNAを不安定化する作用がある[5]。
